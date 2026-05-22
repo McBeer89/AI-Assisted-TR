@@ -9,7 +9,7 @@ What follows are seven failure modes in the collaboration itself. They
 are distinct from any quality rules in your methodology - those govern
 what good output looks like. These govern how good output silently turns
 into bad output when a human stops paying attention. Each one is drawn
-from real TRR production work.
+from real work building a TRR in an ordinary back-and-forth chat.
 
 The single thing to take away: the AI is an accelerator. It makes a
 competent researcher faster. It does not make a novice competent, and
@@ -57,58 +57,62 @@ is not the same as the claim being correct.
 
 ## 3. Anchoring
 
-Once the model can see existing work, it anchors to it. Ask it to review
-a document and it tends to validate what is already written rather than
-re-derive the answer independently. This helps when the existing work is
-correct and reinforces the error when it is not.
+Once the model can see your existing draft, it anchors to it. Paste a
+finished section into the chat and ask for a critique, and it tends to
+validate what is already there rather than re-derive the answer. This
+helps when the draft is right and reinforces the error when it is wrong.
 
-The fix that worked was structural: a review process that re-researches
-the technique *without reading the existing report*, then compares.
-Letting the reviewer see the report first produced agreement. Blinding
-it produced the gaps that agreement had been hiding.
+The reliable workaround is to open a fresh conversation and have the
+model research the point from scratch, without showing it the draft,
+then compare the two results yourself. Seeing the draft first produces
+agreement; withholding it produces the gaps that agreement was hiding.
 
-If you want a genuine second opinion, withhold the first one. Blinding
-the model beats asking it to "be critical."
+If you want a genuine second opinion, do not hand it the first one.
 
 ---
 
 ## 4. Hallucinated Capabilities
 
-The model will confidently propose actions it cannot take and assume
-tools exist that do not.
+The model will confidently claim it can do things it cannot, and reason
+from context it does not actually have.
 
-In one case an automated check flagged incomplete work and then invented
-a "lab-verifier" capability that could run the Windows lab on its own.
-No such thing exists; the model cannot execute the lab. In another, the
-model made absolute claims that certain files did not exist while
-working from a partial view of the project rather than the actual
-filesystem - it reasoned from an incomplete picture and stated the
-conclusion as fact.
+It may offer to "run the test and confirm" or "check the lab" when it
+can only describe what should happen - it cannot execute anything and
+has no results to report. In another case it stated flatly that certain
+files did not exist, while it was working from a partial slice of the
+project rather than the full picture; it reasoned from an incomplete
+view and presented the conclusion as fact.
 
-The model does not reliably know the edge of its own abilities or its
-own context. When it says "I checked and it is not there," make sure
-that means it looked, not that it inferred.
+The model does not reliably know the edge of its own abilities or the
+limits of what it has actually seen. When it says it checked something,
+make sure that means it looked, not that it inferred.
 
 ---
 
 ## 5. Drift
 
-Over a long session the model loses the thread. The scope you set at the
-start fades, and material from adjacent techniques starts bleeding in.
-There is a second form of drift too: when your methodology lives across
-many files, the model's output quietly degrades whenever any one of
-those files falls behind the others.
+Large context windows have taken much of the edge off this one - a model
+holding a million tokens does not lose the early thread as fast as one
+holding a fraction of that. But over a long enough session it still
+happens, in two ways.
 
-A scoping run could not distinguish a file-based variant from a fileless
-one and had to be steered back by hand - which is why an explicit
-scope-confirmation step now sits between research and the rest of the
-work. And a single stale methodology file, left behind during an update,
-became the root cause of a run of output errors, because the agents were
-faithfully following an out-of-date source.
+The first is scope. A technique you bounded clearly at the start
+gradually picks up material from neighboring techniques as the
+conversation goes deep. A report scoped to file-based execution starts
+absorbing details that belong to a different, module-based technique
+entirely, and the boundary you set earlier quietly stops holding.
 
-Re-anchor scope deliberately, and expect to do it more as the session
-grows. When the methodology changes, every file it lives in has to move
-together - the model is only as correct as its least current context.
+The second is discipline. The methodology rules the model applied
+cleanly early in the session erode as context fills. The exact errors
+the prompt was written to suppress - treating a tool as a procedure,
+slipping optional operations into the model - start creeping back. You
+correct them, they hold for a while, then they slip again.
+
+The practical fix is a clean handoff. Have the model produce a detailed
+summary of the conversation so far, then carry that summary along with
+your own notes into a fresh session - you will be back in the groove
+almost immediately. Re-anchoring deliberately like this beats fighting
+the decay in place, especially once a session has run long.
 
 ---
 
@@ -124,25 +128,38 @@ verbose and needed multiple tightening passes, including full restarts
 when the model wandered into doing the wrong discipline's work inside
 the deliverable.
 
-Conciseness is a constraint you impose and then re-impose. The model's
-instinct is always toward more, and more is rarely the deliverable.
+Conciseness is a constraint you impose, and the levers are simple. Some
+models offer style settings - Claude, for instance, has a concise mode
+you can switch on - and even without that, plainly asking the model to
+be brief or to present something concisely works well. The catch is that
+its instinct still drifts back toward more, so you re-impose the
+constraint as the session runs. More is rarely the deliverable.
 
 ---
 
 ## 7. The Verification Burden
 
-You cannot assume the model did what it said. Edits fail silently,
-connections drop mid-write, and automated steps run away from you.
+You cannot assume the model did what it said, or that its output is
+clean and accurate as delivered.
 
-File edits failed without warning when special characters did not match
-exactly; the only reliable confirmation was reading the file back
-afterward. Dropped connections meant work had to be checked for what
-actually persisted. Research steps defaulted to many more web fetches
-than necessary and burned through budget until an explicit limit was
-set.
+A dropped connection mid-response leaves you unsure what actually
+landed, so you have to check before continuing. The model will sometimes
+report that it folded in a change it did not fully make, which only
+reading the result back will reveal. It will also hand you sources that
+do not hold up - a reference link that 404s, points somewhere unrelated,
+or was never a real URL to begin with. Leave one unchecked and you have
+published a citation that leads nowhere, or worse, one that does not say
+what you claimed it does.
 
-Trust nothing as done until you have verified it directly. Reading the
-result back is cheap. A silent failure that ships is not.
+For factual claims in particular, make verification fast by asking for
+the sources up front: a link to each reference, and ideally a specific
+quote from it. Drop that quote into the page's find function and you
+land on the exact context in seconds, instead of rereading a whole
+document to confirm a single point.
+
+Verify directly. Read the output back, confirm the claims trace to real
+sources, and open the links before you trust them. Checking is cheap. A
+silent failure that ships is not.
 
 ---
 
@@ -150,12 +167,27 @@ result back is cheap. A silent failure that ships is not.
 
 None of this is an argument against working with an AI. The throughput
 is real, and it is what makes producing this kind of research at volume
-possible at all. But every failure here is invisible by default and ships
-unless a person who understands the domain is exercising judgment at each
-step.
+possible at all. But every failure here is invisible by default and
+ships unless someone in the loop is actively checking the work rather
+than accepting it.
 
-That is the part worth being honest about: this way of working does not
-turn inexperience into expert output. It lets someone who can already
-recognize right from wrong reach that output faster. The model is an
-accelerator, and an accelerator with no driver only reaches the wall
-sooner.
+It is tempting to conclude that you therefore have to be an expert going
+in. You do not. Someone can come to this with no detection-engineering
+background and no technique-research experience, learn the method from
+good source material, bring real fluency with the tool itself, and -
+through a lot of iteration - produce work worth submitting for review.
+
+What that requires is not expertise up front but grounding every step in
+something outside the model: a methodology to check the shape of the
+work against, documentation and a lab to settle matters of fact, and
+eventually real reviewers to catch what you cannot. The judgment gets
+built during the work rather than brought to it - but it has to be
+built, and it has to stay active. The model supplies speed and
+scaffolding. It never supplies the verdict on whether the output is
+right.
+
+So the accelerator holds, with one correction: the driver does not have
+to start as an expert, but they do have to keep their eyes on the road
+and check it against the map the whole way. Stop steering and the model
+takes you into the wall at speed. Keep steering, keep verifying, and it
+gets you somewhere real - faster than you could have alone.
