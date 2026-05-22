@@ -130,7 +130,19 @@ confident guess every time.
 - [TIRED Labs TRR Library](https://library.tired-labs.org) - published TRRs and
   the home of the methodology.
 - [Threat Detection Engineering: The Series](https://medium.com/@vanvleet/threat-detection-engineering-the-series-7fe818fdfe62)
-  by Andrew VanVleet - the articles the whole method is built on.
+  by Andrew VanVleet - the articles the whole method is built on:
+  - [Plotting a Winning Threat Detection Strategy: A Visual Model](https://medium.com/@vanvleet/threat-detection-strategy-a-visual-model-b8f4fa518441)
+  - [Identifying and Classifying Attack Techniques](https://medium.com/@vanvleet/identifying-and-classifying-attack-techniques-002c0c4cd595)
+  - [The Relative Strengths of Threat (Detection|Hunting)](https://medium.com/@vanvleet/the-relative-strengths-of-threat-detection-hunting-777b03a89d15)
+  - [Compound Probability: You Don't Need 100% Coverage to Win](https://medium.com/@vanvleet/compound-probability-you-dont-need-100-coverage-to-win-a2e650da21a4)
+  - [TTPI's: Extending the Classic Model](https://medium.com/@vanvleet/ttpis-extending-the-classic-model-058c572b76f3)
+  - [The Threat Detection Balancing Act: Coverage vs Cost](https://medium.com/@vanvleet/the-threat-detection-balancing-act-coverage-vs-cost-cdb71d21412f)
+  - [Improving Threat Identification with Detection Data Models](https://medium.com/@vanvleet/improving-threat-identification-with-detection-data-models-1cad2f8ce051)
+  - [DDM Use Case: What ATT&CK Gets Wrong about Process Injection](https://medium.com/@vanvleet/ddm-use-case-what-att-ck-gets-wrong-about-process-injection-7c15b6764bfe)
+  - [Mistaken Identification: When an Attack Technique isn't a Technique](https://medium.com/@vanvleet/mistaken-identification-when-an-attack-technique-isnt-a-technique-8cd9dae6e390)
+  - [Creating Resilient Detections](https://medium.com/@vanvleet/creating-resilient-detections-62f9eb5318eb)
+  - [Technique Analysis and Modeling](https://medium.com/@vanvleet/technique-analysis-and-modeling-ffef1f0a595a)
+  - [Technique Research Reports: Capturing and Sharing Threat Research](https://medium.com/@vanvleet/technique-research-reports-capturing-and-sharing-threat-research-003c80ac9a4d)
 - [Arrows.app](https://arrows.app/) - the tool for drawing DDMs.
 - [Arrows.app tutorial video](https://www.youtube.com/watch?v=ZHJ-BrKJ8A4) - a
   short visual walkthrough.
